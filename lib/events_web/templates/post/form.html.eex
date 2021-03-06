@@ -1,0 +1,15 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Field cannot be empty</p>
+    </div>
+  <% end %>
+<h3>What is your event about?<h3>
+<h4>Please include date and time</h4>
+  <%= textarea f, :body %>
+  <%= error_tag f, :body %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+ <!--Code attribution to Nat Tuck's Lecture 11 notes -->
+<h1>Open Event</h1>
+
+<ul>
+
+  <li>
+    <strong>Event:</strong>
+    <%= @post.body %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
+<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
