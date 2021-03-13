@@ -12,4 +12,7 @@ import "../css/app.scss"
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
-import "phoenix_html"
+import "phoenix_html";
+import 'bootstrap';
+import flatpickr from 'flatpickr';
+flatpickr('.datetime', {enableTime: true, dateFormat: "Y-m-d H:i"})

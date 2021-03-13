@@ -5,6 +5,7 @@ defmodule Events.Posts do
 
   import Ecto.Query, warn: false
   alias Events.Repo
+  alias Events.Invite
 
   alias Events.Posts.Post
 
@@ -19,6 +20,7 @@ defmodule Events.Posts do
   """
   def list_posts do
     Repo.all(Post)
+    |> Repo.preload(:user)
   end
 
   @doc """
@@ -53,6 +55,11 @@ defmodule Events.Posts do
     %Post{}
     |> Post.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def get_invites(id) do
+    Repo.all(from(Events.Invites.Invite, where: [post_id: ^id]))
+    |> Repo.preload(:user)
   end
 
   @doc """

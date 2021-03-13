@@ -21,6 +21,7 @@ defmodule EventsWeb.Router do
     get "/", PageController, :index
     resources "/posts", PostController
     resources "/users", UserController
+    resources "/invites", InviteController
     resources "/sessions", SessionController, 
       only: [:create, :delete], singleton: true
   end

@@ -3,10 +3,31 @@ defmodule EventsWeb.PostController do
 
   alias Events.Posts
   alias Events.Posts.Post
+  alias EventsWeb.Plugs
 
   def index(conn, _params) do
     posts = Posts.list_posts()
     render(conn, "index.html", posts: posts)
+  end
+
+  def require_owner(conn, _args) do
+    user = conn.assigns[:current_user]
+    post = conn.assigns[:post]
+
+    if user.id == post.user_id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Not yours!")
+      |> redirect(to: Routes.page_path(conn, :index))
+      |> halt()
+    end
+  end
+
+  def fetch_post(conn, _args) do
+    id = conn.params["id"]
+    event = Events.get_post!(id)
+    assign(conn, :post, event)
   end
 
   def new(conn, _params) do
